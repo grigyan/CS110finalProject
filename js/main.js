@@ -1,90 +1,173 @@
-    const canvas = document.getElementById("CS110");
-    const context = canvas.getContext('2d');
-    canvas.width = 800;
-    canvas.height = 600;
     
+    var canvas;
+    var context;
 
-    //hero
-    const hero = {
-        x: 390,
-        y: 550,
-        xDelta: 0,
-        yDelta: 0,
-        width: 100,
-        height: 20,
-        draw: function() {
-            
+    canvas = document.getElementById("CS110");
+    context = canvas.getContext('2d');
+    canvas.height = 600;
+    canvas.width = 800;
+
+    paddle1 = {
+        x: 0,
+        y: 50,
+        width: 15,
+        height: 100,
+        draw: function(){
             context.fillRect(this.x, this.y, this.width, this.height);
         },
-        update: function() {
-            this.x += this.xDelta;
-            this.y += this.yDelta;
+        update: function(){
+
         }
+    }
+
+
+    let p1Score = 0;
+    let p2Score = 0;
+    
+    
+
+    ball = {
+        x: 50,
+        y: 50,
+        xDelta: 5,
+        yDelta: 4,
+        radius: 10,
+        
+        draw: function(){
+            context.beginPath();
+            context.arc(this.x, this.y, this.radius, 0, Math.PI*2, true);
+            context.fill();
+            
+        },
+        reset: function(){
+            this.x = canvas.width/2;
+            this.y = canvas.height/2;
+            this.xDelta = -this.xDelta;
+            const targetScore = 2;
+            if (p1Score == targetScore) {
+                
+                alert('YOU WIN!!!');
+                p1Score = 0;
+                p2Score = 0;
+            } 
+            if (p2Score == targetScore) {
+                
+                alert('YOU LOSE(((');
+                p1Score = 0;
+                p2Score = 0;
+            } 
+
+        },
+        update: function(){
+            this.x = this.x + this.xDelta;
+            if (this.x + this.radius > canvas.width) {
+                if (this.y > paddle2.y && this.y < paddle2.y+paddle2.height) {
+                    this.xDelta = -this.xDelta;
+                    const deltaYSpeed = this.y - (paddle2.y + paddle2.height/2);
+                    this.yDelta = deltaYSpeed * 0.2; 
+                } else {
+                    p1Score++;
+                    this.reset();
+                }
+            } 
+            
+            if (this.x - this.radius < 0){
+                
+                if (this.y > paddle1.y && this.y < paddle1.y+paddle1.height) {
+                    this.xDelta = -this.xDelta;
+                    const deltaYSpeed = this.y - (paddle1.y + paddle1.height/2);
+                    this.yDelta = deltaYSpeed * 0.35; 
+                } else {
+                    p2Score++;
+                    this.reset();
+                }
+                
+            }
+
+            this.y = this.y + this.yDelta;
+            if (this.y + this.radius > canvas.height) {
+                this.yDelta = -this.yDelta;
+            } else if (this.y - this.radius < 0){
+                this.yDelta = -this.yDelta;
+            }
+        },
+        
+         
+    }
+
+
+    paddle2 = {
+        x: canvas.width - 15,
+        y: canvas.height/2,
+        width: 15,
+        height: 100,
+        //YCenter: this.y + (this.height/2),
+        draw: function(){
+            context.fillRect(this.x, this.y, this.width, this.height);
+        },
+        update: function(){
+            if (this.y + (this.height/2) < ball.y - 35) {
+                this.y += 6;
+            } else if (this.y + (this.height/2) > ball.y + 35) {
+                this.y -= 6;
+            }
+        }
+    }
+
+
+    function displayScore(){
+        context.fillText(p1Score, 175, 175);
+        context.fillText(p2Score, canvas.width-175, 175);
     }
 
     
-    //moving hero part
-    const leftKey = 37;
-    const upKey = 38;
-    const rightKey = 39;
-    const downKey = 40;
-
-    //donw key
-    document.addEventListener('keydown', function(event){
-        if (event.keyCode === downKey) {
-            hero.yDelta = 3;
+    function showNet(){
+        for (let i = 0; i < canvas.height; i += 45) {
+            context.fillRect(canvas.width/2-1, i, 2, 20);
         }
-    }, false);
-    document.addEventListener('keyup', function(event){
-        if (event.keyCode === downKey) {
-            hero.yDelta = 0;
-        }
-    }, false);
-    //up key
-    document.addEventListener('keydown', function(event){
-        if (event.keyCode === upKey) {
-            hero.yDelta = -3;
-        }
-    });
-    document.addEventListener('keyup', function(event){
-        if (event.keyCode === upKey) {
-            hero.yDelta = 0;
-        }
-    });
-    //right key
-    document.addEventListener('keydown', function(event){
-        if (event.keyCode === rightKey) {
-            hero.xDelta = 3;
-        }
-    }, false);
-    document.addEventListener('keyup', function(event){
-        if (event.keyCode === rightKey) {
-            hero.xDelta = 0;
-        }
-    }, false);
-    //left key
-    document.addEventListener('keydown', function(event){
-        if (event.keyCode === leftKey) {
-            hero.xDelta = -3;
-        }
-    }, false);
-    document.addEventListener('keyup', function(event){
-        if (event.keyCode === leftKey) {
-            hero.xDelta = 0;
-        }
-    }, false);
+    }
 
 
-    function drawBackground(){
-        context.fillStyle = "grey";
+    function readySetGo(){
+        context.fillStyle = 'black';
         context.fillRect(0, 0, canvas.width, canvas.height);
-        context.fillStyle = "black";
+        context.fillStyle = 'white';
+        ball.draw();
+        ball.update();
+        paddle1.draw();
+        paddle1.update();
+        paddle2.draw();
+        paddle2.update();
+        displayScore(); 
+        showNet();
     }
 
-    const loop = function(){
-        drawBackground();
-        hero.draw();
-        hero.update();
-        requestAnimationFrame(loop);
+
+
+    //moving using mouse 
+    function calculateMousePos(evt){
+        const  rect = canvas.getBoundingClientRect();
+        const root = document.documentElement;
+        const mouseX = evt.clientX - rect.left - root.scrollLeft;
+        const mouseY = evt.clientY - rect.top - root.scrollTop;
+        return {
+            x: mouseX,
+            y: mouseY
+        };
     }
-    loop();
+
+
+
+    window.onload = function (){
+        const fps = 50;
+        setInterval(readySetGo, 1000/fps);
+
+    canvas.addEventListener('mousemove', 
+        function(evt){
+            const mousePos = calculateMousePos(evt);
+            paddle1.y = mousePos.y-(paddle1.height/2);
+        });
+    }
+    
+     
+
