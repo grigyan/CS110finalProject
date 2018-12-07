@@ -1,0 +1,150 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+
+
+    <link rel="stylesheet" type="text/css" href="startpage.css">
+
+
+    <style>
+            
+        @font-face{
+        font-family:"novem";
+        src:url("font/novem___.ttf") 
+        }
+
+        a{font-family:novem;}    
+            
+    </style>
+
+    
+    <title>Game</title>
+</head>
+<body>
+
+    <div id="outer">
+        <div id="inner">
+            <a href="#" class="button3"></a>
+            <a href="#" class="button4"> PONG </a>
+            <a onclick="redirect('index1.0.html')" class="button"> Classic Mode </a>
+            <a href="index2.0.html" class="button1"> Multiplayer </a> 
+            <a href="instructions.html" class="button2"> Intructions </a> 
+            <a href="#" class="button5"> Developed By: <br>
+            Grigor Nalbandyan <br>
+            Alen Gyulazyan <br>
+            Andre Khachatryan <br> </a>
+            
+        </div>
+    </div>
+
+
+
+    <audio src="reactionSounds/klasik.mp3" id="classicGago"></audio>
+</body>
+
+<script>
+function redirect(fileName) {
+    var classGago = document.getElementById('classicGago');
+    play(classGago);
+    setTimeout(function(){
+        window.location.href=fileName;
+    }, 2000)
+    
+}
+
+function play(object){
+        var key = true;
+        if(key){
+            object.pause();
+            object.currentTime = 0;
+            object.play();
+            key = false;
+        }
+    }
+</script>
+</html> -->
+
+<html>
+
+
+    <head>
+        <link rel="stylesheet" type="text/css" href="startpage.css">
+            <style>
+                    
+                @font-face{
+                font-family:"novem";
+                src:url("font/novem___.ttf") 
+                }
+        
+                body{font-family:novem;}    
+            </style>    
+        <title>Game</title>
+    </head>    
+
+    <body>
+        
+        <div id="all">
+            <div id="contentBox">
+
+                
+                <div id="pongBox">
+                    <div id="pongBox-inner">
+                            <div id="pong">
+                                    <h1> PONG </h1>
+                            </div>
+                    </div>
+                </div>
+
+
+                <div id="contentBox-inner">
+
+                        <div id="buttons">
+                                <ul>
+                                    <li id="classMode"><a onclick="redirect('index1.0.html')" class="button"> Classic Mode </a></li>
+                                    <li><a href="index2.0.html" class="button1"> Multiplayer </a></li>
+                                    <li><a href="instructions.html" class="button2"> Intructions </a></li>
+                                </ul>
+                        </div>
+
+                        
+                </div>
+
+                <div id="dev">
+                        Developed By: <br>
+                        Grigor Nalbandyan <br>
+                        Alen Gyulazyan <br>
+                        Andre Khachatryan <br>
+                </div>
+                
+            </div>
+            
+            
+
+            <audio src="reactionSounds/klasik.mp3" id="classicGago"></audio>
+
+        </div>
+            
+    </body>
+
+    <script>
+            function redirect(fileName) {
+                var classGago = document.getElementById('classicGago');
+                play(classGago);
+                setTimeout(function(){
+                    window.location.href=fileName;
+                }, 2000)
+                
+            }
+            
+            function play(object){
+                    var key = true;
+                    if(key){
+                        object.pause();
+                        object.currentTime = 0;
+                        object.play();
+                        key = false;
+                    }
+                }
+        </script>
+
+</html>

@@ -13,32 +13,20 @@
     //bounce sound 
     var bounceSound = document.getElementById('bounce');
     
-    // try again sound at the end
+    // try again at the end
     var sound = document.getElementById('tryAgain');
-    var ser = document.getElementById('ser');
 
-    // random sound reactions
+    // random reactions
     var toAnasun = document.getElementById('toAnasun');
     var zzveliTxaya = document.getElementById('zzveliTxa');
     var imonqEn = document.getElementById('imonqEn');
-    
-    
-    // classic cavy tanem amena skzbic
-    // var classGago = document.getElementById('classicGago');
-    // let classicG = true;
 
-    // function playGago(){
-    //     if(classicG){
-    //         play(classGago);
-    //     }
-    //     classicG = false;
-    // }
-
-    //array that stores all the reaction sounds 
+    //array that stores all the sounds 
     var soundArr = [" ", toAnasun, zzveliTxaya, imonqEn];
 
     //function that plays given sound effect
     function play(object){
+
         var key = true;
         if(key){
             object.pause();
@@ -48,7 +36,7 @@
         }
     }
 
-    //function that randomly plays 
+    //function that randomly plays
     function randomPlay(){
         var indexthSound = random(soundArr.length-1);
         console.log(indexthSound);
@@ -68,48 +56,102 @@
     let p2Score = 0;
     const targetScore = 3;
     let showingWinScreen = false;
-    
 
     paddle1 = {
         x: 2,
         y: canvas.height/2,
+        speed:9,
+        yDelta:0,
         width: 15,
         height: 150,
         draw: function(){
             context.fillRect(this.x, this.y, this.width, this.height);
         },
-        update: function(){
-
+        update:function(){
+            this.y += this.yDelta;
+            if(this.y >= canvas.height){
+                this.y = 0 - this.height
+            }else if(this.y + this.height <= 0){
+                this.y = canvas.height
+            }
         }
     }
 
     paddle2 = {
         x: canvas.width - 15 - 2,
         y: canvas.height/2,
+        speed:9,
+        yDelta:0,
         width: 15,
         height: 150,
-        speed: 8,
-        draw: function(){
+         draw: function(){
             context.fillRect(this.x, this.y, this.width, this.height);
         },
         update: function(){
-            if (this.y + (this.height/2) < ball.y - 35) {
-                this.y += this.speed;
-            } else if (this.y + (this.height/2) > ball.y + 35) {
-                this.y -= this.speed;
+            this.y += this.yDelta;
+            if(this.y >= canvas.height){
+                this.y = 0 - this.height
+            }else if(this.y + this.height <= 0){
+                this.y = canvas.height
             }
         }
     }
+
+    //1st player
+    const upKey1 = 87;
+    const downKey1 = 83;
+    document.addEventListener('keydown', function(event) {
+        if(event.keyCode === upKey1) {
+        paddle1.yDelta = paddle1.speed*-1;
+        }
+        if(event.keyCode === downKey1){
+        paddle1.yDelta = paddle1.speed;
+        }
+        }, false);
+    document.addEventListener('keyup', function(event) {
+        if(event.keyCode === downKey1){
+        paddle1.yDelta = 0;
+        }if( event.keyCode === upKey1){
+        paddle1.yDelta = 0;
+        }             
+        }, false);
+
+    //end 1st player    
+
+
+    //2nd payer
+    const upKey2 = 38;
+    const downKey2 = 40;
+    document.addEventListener('keydown', function(event) {
+        if(event.keyCode === upKey2) {
+        paddle2.yDelta = paddle2.speed*-1;
+        }
+        if(event.keyCode === downKey2){
+            paddle2.yDelta = paddle2.speed;
+        }
+    }, false);
+    document.addEventListener('keyup', function(event) {
+        if(event.keyCode === downKey2){
+        paddle2.yDelta = 0;
+        }if( event.keyCode === upKey2){
+        paddle2.yDelta = 0;
+        }               
+        }, false);
+
+    //2nd player        
+
+
+
 
     ball = {
         x: canvas.width/2,
         y: canvas.height/2,
         xDelta: rand(8, 12),
-        yDelta: rand(6, 10 ),
+        yDelta: rand(5, 9 ),
         radius: 13,
 
         initialXDelta: rand(8, 12), //this variable is used when starting new game
-        initialYDelta: rand(6, 10), //this variable is used when starting new game
+        initialYDelta: rand(5, 9), //this variable is used when starting new game
         
         draw: function(){
             context.beginPath();
@@ -121,43 +163,43 @@
             //moving by X axis
             this.x = this.x + this.xDelta;
 
-            //bounce from right side
-            if (this.x + this.radius > canvas.width) {
-                if (this.y > paddle2.y && this.y < paddle2.y+paddle2.height) {
-                    play(bounceSound);
-                    this.xDelta = -this.xDelta;
-                    const deltaYSpeed = this.y - (paddle2.y + paddle2.height/2);
-                    this.yDelta = deltaYSpeed * 0.25; 
-                } else {
-                    p1Score++;
-                    if(p1Score >= targetScore){
-                        play(ser);
-                    } else{
-                        randomPlay();
-                    }
-                    this.reset();
-                }
-            } 
-
-            //bounce from left side
-            if (this.x - this.radius < 0){
-                
-                if (this.y > paddle1.y && this.y < paddle1.y+paddle1.height ) {
-                    play(bounceSound);
-                    this.xDelta = -this.xDelta;
-                    const deltaYSpeed = this.y - (paddle1.y + paddle1.height/2);
-                    this.yDelta = deltaYSpeed * 0.35; 
-                } else {
-                    p2Score++;
-                    if(p2Score >= targetScore){
-                        play(sound);
-                    } else{
-                        randomPlay();
-                    }
-                    this.reset();
-                }
-                
+    //bounce from right side
+    if (this.x + this.radius > canvas.width) {
+        if (this.y > paddle2.y && this.y < paddle2.y+paddle2.height) {
+            play(bounceSound);
+            this.xDelta = -this.xDelta;
+            const deltaYSpeed = this.y - (paddle2.y + paddle2.height/2);
+            this.yDelta = deltaYSpeed * 0.25; 
+        } else {
+            p1Score++;
+            if(p1Score >= targetScore){
+                play(sound);
+            } else{
+                randomPlay();
             }
+            this.reset();
+        }
+    } 
+
+    //bounce from left side
+    if (this.x - this.radius < 0){
+        
+        if (this.y > paddle1.y && this.y < paddle1.y+paddle1.height ) {
+            play(bounceSound);
+            this.xDelta = -this.xDelta;
+            const deltaYSpeed = this.y - (paddle1.y + paddle1.height/2);
+            this.yDelta = deltaYSpeed * 0.35; 
+        } else {
+            p2Score++;
+            if(p2Score >= targetScore){
+                play(sound);
+            } else{
+                randomPlay();
+            }
+            this.reset();
+        }
+        
+    }
 
             //moving by Y axis
             this.y = this.y + this.yDelta;
@@ -178,9 +220,13 @@
             this.xDelta = -this.xDelta;
             this.yDelta = 3;
 
+            
+            
             if(p1Score >= targetScore || p2Score >= targetScore) {
-                showingWinScreen = true;;
+                showingWinScreen = true;
+
             }
+            
         },
 
         stop: function(){
@@ -214,19 +260,6 @@
         }
     }
 
-
-    //moving using mouse 
-    function calculateMousePos(evt){
-        const  rect = canvas.getBoundingClientRect();
-        const root = document.documentElement;
-        const mouseX = evt.clientX - rect.left - root.scrollLeft;
-        const mouseY = evt.clientY - rect.top - root.scrollTop;
-        return {
-            x: mouseX,
-            y: mouseY
-        };
-    }
-
     
     function readySetGo(){
         context.fillStyle = 'black';
@@ -240,24 +273,15 @@
         paddle2.draw();
         paddle2.update();
         displayScore(); 
-        showNet();
-        // playGago(); 
+        showNet();   
     }
 
 
     window.onload = function (){
         const fps = 55;
         setInterval(readySetGo, 1000/fps);
-
-        canvas.addEventListener('mousemove', 
-            function(evt){
-                const mousePos = calculateMousePos(evt);
-                paddle1.y = mousePos.y-(paddle1.height/2);
-            });
-
-
         const spaceKey = 32;
-        document.addEventListener('keyup', function(event){
+        document.addEventListener('keydown', function(event){
             if (event.keyCode === spaceKey) {
                     ball.x = canvas.width/2;
                     ball.y = canvas.height/2;
@@ -267,7 +291,9 @@
                     p2Score = 0;
                     showingWinScreen = false;
                 }
-            }, true); 
+            }, true);
+        
+        
     }
 
 
@@ -276,46 +302,10 @@
      * when someone scores, ball should start with its initial speed to the opposit direction +
      * user-interface +-
      * when ending the game, final score should be as it is +
-     * multiplayer mode +
-     * 
-     * 
      * sometimes ball is stuck on top or in bottom, fix this - 
+     * target score is 8 -
      * with each score paddle height becomes smaller and smaller -
-     * finalize reaction part
-     * 
-     * 
-     *      =====Andre Part=====
-     *          cange colors-
-     *          make buttons symmetric-
-     *          add "GO Back" button-
-     * 
-     *  =====Alen Part=====
-     * 
-     *  =====Grig Part=====
-     * 
+     * multiplayer mode -
+     * bounce from padlles, do not get into it -
+     * (PADDLE 2 movement) when ball is far enough do not move -
      */
-
-
-
-
-
-     /**
-      * 
-      * 
-      * ai+
-      * ball movement+
-      * 
-      * 
-      * 
-      * 
-      * mknik+
-      * multiplayer
-      * ball movement
-      * sound effects
-      * interface
-      * 
-      * 
-      * GRIG - ai, ball movement
-      * Alen - sound, knopkeqov  
-      * Andre - mouse movement, interface, html, css, key-responsive functions  
-      */

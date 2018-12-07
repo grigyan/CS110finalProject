@@ -1,0 +1,111 @@
+.button3 {
+  background-color: black;	
+  border: none;
+  color: ;
+  padding: 6000px 683px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  position: fixed;
+  left: 0px;
+  top:  0px;
+  cursor: pointer;
+}
+
+
+.SPI {
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 20px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 40px;
+  position: fixed;
+  left: 60px  ;
+  top: 20px;
+   cursor: pointer;
+}
+
+
+
+.DM {
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 20px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
+  position: fixed;
+  left: 60px  ;
+  top: 145px;
+   cursor: pointer;
+}
+
+.MI {
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 20px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 40px;
+  position: fixed;
+  left: 60px  ;
+  top: 200px;
+   cursor: pointer;
+}
+
+
+.LPI {
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 20px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
+  position: fixed;
+  left: 60px  ;
+  top: 335px;
+   cursor: pointer;
+}
+
+
+.RPI {
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 20px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
+  position: fixed;
+  left: 60px  ;
+  top: 475px;
+   cursor: pointer;
+}
+
+
+.button {
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 20px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
+  position: fixed;
+  left: 60px  ;
+  top: 580px;
+   cursor: pointer;
+}
+
