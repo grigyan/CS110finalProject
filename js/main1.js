@@ -49,12 +49,12 @@
 
     canvas = document.getElementById("CS110");
     context = canvas.getContext('2d');
-    canvas.height = 730;
+    canvas.height = 790;
     canvas.width = 1517;
 
     let p1Score = 0;
     let p2Score = 0;
-    const targetScore = 3;
+    const targetScore = 4;
     let showingWinScreen = false;
 
     paddle1 = {

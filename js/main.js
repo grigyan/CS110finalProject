@@ -9,7 +9,6 @@
         return Math.floor(Math.random() * (max-min+1) + min);
     };
  
-
     //bounce sound 
     var bounceSound = document.getElementById('bounce');
     
@@ -22,17 +21,6 @@
     var zzveliTxaya = document.getElementById('zzveliTxa');
     var imonqEn = document.getElementById('imonqEn');
     
-    
-    // classic cavy tanem amena skzbic
-    // var classGago = document.getElementById('classicGago');
-    // let classicG = true;
-
-    // function playGago(){
-    //     if(classicG){
-    //         play(classGago);
-    //     }
-    //     classicG = false;
-    // }
 
     //array that stores all the reaction sounds 
     var soundArr = [" ", toAnasun, zzveliTxaya, imonqEn];
@@ -61,12 +49,12 @@
 
     canvas = document.getElementById("CS110");
     context = canvas.getContext('2d');
-    canvas.height = 730;
+    canvas.height = 790;
     canvas.width = 1517;
 
     let p1Score = 0;
     let p2Score = 0;
-    const targetScore = 3;
+    const targetScore = 4;
     let showingWinScreen = false;
     
 
@@ -179,7 +167,7 @@
             this.yDelta = 3;
 
             if(p1Score >= targetScore || p2Score >= targetScore) {
-                showingWinScreen = true;;
+                showingWinScreen = true;
             }
         },
 
@@ -241,7 +229,6 @@
         paddle2.update();
         displayScore(); 
         showNet();
-        // playGago(); 
     }
 
 

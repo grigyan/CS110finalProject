@@ -2,7 +2,7 @@
   background-color: black;	
   border: none;
   color: ;
-  padding: 6000px 683px;
+  padding: 400px 700px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -22,7 +22,7 @@
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 40px;
+  font-size: 50px;
   position: fixed;
   left: 60px  ;
   top: 20px;
@@ -39,10 +39,10 @@
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 25px;
+  font-size: 35px;
   position: fixed;
   left: 60px  ;
-  top: 145px;
+  top: 160px;
    cursor: pointer;
 }
 
@@ -54,10 +54,10 @@
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 40px;
+  font-size: 55px;
   position: fixed;
   left: 60px  ;
-  top: 200px;
+  top: 220px;
    cursor: pointer;
 }
 
@@ -70,10 +70,10 @@
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 25px;
+  font-size: 35px;
   position: fixed;
   left: 60px  ;
-  top: 335px;
+  top: 380px;
    cursor: pointer;
 }
 
@@ -86,10 +86,10 @@
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 25px;
+  font-size: 35px;
   position: fixed;
   left: 60px  ;
-  top: 475px;
+  top: 500px;
    cursor: pointer;
 }
 
@@ -102,10 +102,10 @@
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 25px;
+  font-size: 35px;
   position: fixed;
   left: 60px  ;
-  top: 580px;
+  top: 670px;
    cursor: pointer;
 }
 
