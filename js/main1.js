@@ -49,8 +49,8 @@
 
     canvas = document.getElementById("CS110");
     context = canvas.getContext('2d');
-    canvas.height = 790;
-    canvas.width = 1517;
+    canvas.height = window.innerWidth;
+    canvas.width = window.innerHeight;
 
     let p1Score = 0;
     let p2Score = 0;
